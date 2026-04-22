@@ -5,4 +5,8 @@ app.get("/", (req, res) => {
     res.status(200).json({ message: "API Funcionando" });
 })
 
+app.get("/clients", (req, res) => {
+    res.status(200).json({ message: "Ok", clients:{ c1 , c2 } });
+})
+
 module.exports = app;
