@@ -2,7 +2,7 @@ name: Deploy to EC2
 
 on: 
   push: 
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   deploy: 
@@ -31,14 +31,14 @@ jobs:
 
       - name: Agregar al host conocido
         run: |
-          ssh-keyscan -H ec2-3-90-210-163.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+          ssh-keyscan -H ec2-54-145-24-29.compute-1.amazonaws.com >> ~/.ssh/known_hosts
 
       - name: Copiar archivos al EC2 con rsync
         run: |
           rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
             --exclude='.git' \
             --exclude='node_modules' \
-            ./ ubuntu@ec2-3-90-210-163.compute-1.amazonaws.com:/var/www/api_devops
+            ./ ubuntu@ec2-54-145-24-29.compute-1.amazonaws.com:/var/www/api_devops
 
       - name: Instalar las librerias en el servidor
         run: |
@@ -48,4 +48,4 @@ jobs:
       - name: Reiniciar PM2 correctamente
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-90-210-163.compute-1.amazonaws.com \
-            "pm2 restart api || pm2 start /var/www/api_devops/server.js --name api"
+            "pm2 restart api || pm2 start /var/www/emanuelf/server.js --name api"
