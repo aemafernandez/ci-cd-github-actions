@@ -42,10 +42,10 @@ jobs:
 
       - name: Instalar las librerias en el servidor
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-90-210-163.compute-1.amazonaws.com \
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-145-24-29.compute-1.amazonaws.com \
             "cd /var/www/api_devops && npm install"
 
       - name: Reiniciar PM2 correctamente
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@ec2-3-90-210-163.compute-1.amazonaws.com \
+          ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-145-24-29.compute-1.amazonaws.com \
             "pm2 restart api.emanuelf || pm2 start /var/www/emanuelf/server.js --name api.emanuelf"
